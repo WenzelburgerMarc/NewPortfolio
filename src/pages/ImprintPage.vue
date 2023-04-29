@@ -1,7 +1,7 @@
 <template>
     <div class="imprint-header">
         <h6>Marc Wenzelburger</h6>
-        <h6>Computer Science student @ HS Schmalkalden</h6>
+        <h6>Computer Science Student @ HS Schmalkalden</h6>
         <h6>98574 Schmalkalden, Germany</h6>
         <h6>contact@marcwenzelburger.com</h6>
         <a :href="homeLink" class="goPortfolioBtn">Portfolio</a>

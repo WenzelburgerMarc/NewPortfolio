@@ -25,7 +25,11 @@
                 <li>
                     <a href="#contact">Contact</a>
                 </li>
+                <li>
+                    <a @click="$router.push('/imprint')" class="imprint-link dark-mode">Imprint</a>
+                </li>
             </ul>
+
             <p>©2023 Marc Wenzelburger<br />All Rights Reserved</p>
         </div>
     </footer>
@@ -85,6 +89,7 @@ footer {
             display: inline-block;
             transition: 0.25s ease;
             pointer-events: auto;
+            cursor: pointer;
 
             &:hover {
                 color: $effect-color;

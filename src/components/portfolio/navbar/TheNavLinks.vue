@@ -11,9 +11,6 @@
     <li class="nav-item">
         <a href="#contact" @click="closeMobile" class="nav-link dark-mode">Contact</a>
     </li>
-    <li class="nav-item">
-        <a @click="$router.push('/imprint')" class="nav-link dark-mode">Imprint</a>
-    </li>
 </template>
 <script>
 export default {
