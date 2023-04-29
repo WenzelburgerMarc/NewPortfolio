@@ -33,7 +33,7 @@
 import * as yup from 'yup';
 import emailjs from 'emailjs-com';
 import { fixAppearance } from "@/global_js/portfolio/fixAppearance.js";
-emailjs.init("HL3I80pvFGGfwyxKR");
+emailjs.init("yourpublickey");
 export default {
     name: 'TheContactForm',
     data() {
@@ -74,8 +74,8 @@ export default {
                     reply_to: this.email,
                 };
 
-                const serviceID = "marcwenzelburger.com";
-                const templateID = "template_ul302ft";
+                const serviceID = "yourserviceid";
+                const templateID = "yourtemplateid";
                 emailjs.send(serviceID, templateID, emailParams).then(
                     (response) => {
                         //console.log('Email successfully sent:', response);
