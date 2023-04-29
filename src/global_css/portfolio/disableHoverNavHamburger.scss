@@ -1,0 +1,18 @@
+@media (hover: none) {
+
+  .nav-mobile-toggler.active .bar.middle {
+    transform: translateY(-50%) !important;
+  }
+
+  .nav-mobile-toggler.active .bar.top {
+    transform: inherit !important;
+  }
+
+  .nav-mobile-toggler.active .bar.bottom {
+    transform: inherit !important;
+  }
+
+  .nav-mobile-toggler:hover .bar.middle {
+    transform: translateY(-50%) !important;
+  }
+}

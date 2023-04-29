@@ -1,0 +1,38 @@
+/* Variables */
+
+// Text Variables / fw = font-weight, fs = font-size
+$fw-extra-light: 200;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-bold: 500;
+
+$fs-xxs: 1.4rem;
+$fs-xs: 1.6rem;
+$fs-sm: 2rem;
+$fs-md: 2.4rem;
+$fs-lg: 3.2rem;
+$fs-xl: 4rem;
+$fs-xxl: 5rem;
+$fs-xxxl: 6rem;
+
+
+// Colors Variables (both used in dark and light mode) - keep in mind that we used darken() and lighten() if you change colors here
+
+$color1-dark: rgb(0, 0, 0); //Borders + Foreground in Light Mode | #000
+$color2-dark: rgb(
+  34,
+  47,
+  62
+); //Foreground in Light mode and background in Dark Mode |#222f3e
+$color3-dark: $color2-dark; //BG in Dark Mode | #222f3e
+$color1-light: #ffffff; //Foreground + Border in Dark Mode, Border + Color in Light Mode | #fff
+$color2-light: rgb(131, 149, 167); //BG in light and dark mode | #8395a7
+
+// Accent Color
+$effect-color: rgb(95, 39, 205);
+
+// Blob Hover Effect
+$blob-color-1: rgba(255, 255, 255, 0.6);
+$blob-color-2: rgb(243, 104, 224);
+$blob-color-3: rgb(95, 39, 205);
+$blob-color-4: $effect-color;

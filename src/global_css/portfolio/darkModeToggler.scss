@@ -1,0 +1,32 @@
+.darkMode-Toggler i {
+  font-size: $fs-lg;
+  font-weight: $fw-regular;
+  color: $color2-dark;
+  transform: rotate(260deg);
+  cursor: pointer;
+  transition: 0.25s ease;
+
+  &.dark {
+    color: $color1-light;
+  }
+
+  &:hover {
+    color: $effect-color;
+    transform: translateY(-2px) rotate(260deg);
+
+    &.dark {
+      color: $effect-color;
+    }
+  }
+}
+
+@media (hover: none) {
+  .darkMode-Toggler i:hover {
+    color: $color2-dark !important;
+    transform: rotate(260deg) !important;
+
+    &.dark {
+      color: $color1-light !important;
+    }
+  }
+}
