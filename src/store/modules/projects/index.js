@@ -11,6 +11,7 @@ const state = {
       html_url: "",
       image: "",
       openProjectLink: "",
+      created_at: "",
     },
   ],
 };
@@ -26,7 +27,7 @@ const actions = {
     );
     const repositories = await Promise.all(
       data.map(async (repo) => {
-        const { name, description, html_url, languages_url } = repo;
+        const { name, description, html_url, languages_url, created_at } = repo;
         const { data: crawledLanguages } = await axios.get(languages_url);
         const portfolioLink = await checkForPortfolioLink(repo.name);
         const imageLink = await checkForImageLink(repo.name);
@@ -38,10 +39,13 @@ const actions = {
           html_url,
           openProjectLink: portfolioLink ? portfolioLink.trim() : "",
           image: imageLink ? imageLink.trim() : "",
+          created_at,
         };
       })
     );
-    commit("setProjects", repositories);
+
+    const sortedProjects = sortProjectsByDate(repositories);
+    commit("setProjects", sortedProjects);
   },
 };
 
@@ -56,11 +60,9 @@ async function checkForPortfolioLink(repoName) {
     );
     return data;
   } catch (error) {
-    //console.clear();
     return "";
   }
 }
-
 async function checkForImageLink(repoName) {
   try {
     await axios.get(
@@ -75,18 +77,11 @@ async function checkForImageLink(repoName) {
   }
 }
 
-// async function fetchReadme(repoName) {
-//   try {
-//     const { data } = await axios.get(
-//       `https://api.github.com/repos/WenzelburgerMarc/${repoName}/readme`
-//     );
-//     const { content } = data;
-//     return atob(content);
-//   } catch (error) {
-//     console.clear();
-//     return "";
-//   }
-// }
+function sortProjectsByDate(projects) {
+  return projects.sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
+}
 
 export default {
   state,

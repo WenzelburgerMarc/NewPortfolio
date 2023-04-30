@@ -2,28 +2,46 @@
     <div class="projects-header">
         <h3 class="dark-mode">Projects</h3>
         <div class="search-box">
-            <input type="text" class="dark-mode" id="search-input" placeholder="Search for Title, Description or Language"
-                v-model="searchQueryProjects" />
-            <a @click="sendQueryProjectsToParent" class="btnSearch" id="btnSearch"><i
-                    class="bx bx-search-alt-2 dark-mode"></i></a>
+            <input v-on:keydown.enter="sendQueryProjectsToParent" type="text" class="dark-mode" id="search-input"
+                :placeholder="searchPlaceholder" v-model="searchQueryProjects" />
+            <a @click="sendQueryProjectsToParent" class="btnSearch" id="btnSearch">
+                <i class="bx bx-search-alt-2 dark-mode"></i>
+            </a>
         </div>
     </div>
 </template>
+
 <script>
 export default {
     name: "TheProjectsHeader",
     data() {
         return {
             searchQueryProjects: "",
-        }
+            searchPlaceholder: "Search for Title, Description or Language",
+        };
+    },
+    mounted() {
+        window.addEventListener("resize", this.updateSearchPlaceholder);
+        this.updateSearchPlaceholder();
+    },
+    beforeUnmount() {
+        window.removeEventListener("resize", this.updateSearchPlaceholder);
     },
     methods: {
         sendQueryProjectsToParent() {
-            this.$emit('searchQueryProjects', this.searchQueryProjects);
+            this.$emit("searchQueryProjects", this.searchQueryProjects);
+        },
+        updateSearchPlaceholder() {
+            if (window.innerWidth >= 600) {
+                this.searchPlaceholder = "Search for Title, Description or Language";
+            } else {
+                this.searchPlaceholder = "Search for Projects";
+            }
         },
     },
-}
+};
 </script>
+
 <style lang="scss" scoped>
 @import "@/global_css/portfolio/variables.scss";
 

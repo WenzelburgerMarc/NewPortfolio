@@ -2,6 +2,9 @@
     <section class="projects dark-mode" id="projects">
         <!-- Projects Header Start -->
         <TheProjectsHeader @searchQueryProjects="handleSearchedProjects" />
+        <h6 v-if="noProjectFound" class="dark-mode">No Projects found!</h6>
+        <p v-if="noProjectFound" class="dark-mode">Here is something you may like</p>
+
         <!-- Projects Header End -->
 
         <!-- Projects Body Start -->
@@ -13,19 +16,21 @@
         <!-- Load More Button End -->
 
         <!-- Read More Card Start -->
-        <!-- Read More Card Start -->
         <TheReadMoreCard :project="filteredProjects[readMoreCardIndex]" v-on:closeReadMore="handleCloseReadMore"
-            v-if="computedReadMoreCardIndex != -1" class="animate__animated animate__fadeIn" />
+            v-if="readMoreCardClosState !== -1"
+            :class="['animate__animated', readMoreCardClosState === -2 ? 'animate__fadeOut' : 'animate__fadeIn']" />
         <!-- Read More Card End -->
 
         <!-- Read More Card End -->
     </section>
 </template>
+
 <script>
 import TheProjectsHeader from "./TheProjectsHeader.vue";
 import TheProjectsBody from "./TheProjectsBody.vue";
 import TheLoadMoreButton from "./TheLoadMoreButton.vue";
 import TheReadMoreCard from "./TheReadMoreCard.vue";
+import { fixAppearance } from "@/global_js/portfolio/fixAppearance.js";
 export default {
     name: "TheProjectsSection",
     components: {
@@ -36,9 +41,11 @@ export default {
     },
     data() {
         return {
-            readMoreCardIndex: -1,
+            readMoreCardIndex: 0,
+            readMoreCardClosState: -1,
             projectsSearchQuery: "",
             projectsLimit: 3,
+            noProjectFound: false,
         }
     },
     created() {
@@ -46,10 +53,7 @@ export default {
     },
     computed: {
         filteredProjects() {
-            if (this.projectsSearchQuery === "") {
-                return this.$store.getters.allProjects.slice(0, this.projectsLimit);
-            }
-            return this.$store.getters.allProjects.filter(project => {
+            const filtered = this.$store.getters.allProjects.filter(project => {
                 const searchLower = this.projectsSearchQuery.toLowerCase();
                 const languagesLower = project.languages.map(lang => lang.toLowerCase());
                 const languagesString = languagesLower.join(' ');
@@ -58,6 +62,14 @@ export default {
                     languagesString.includes(searchLower);
             }).slice(0, this.projectsLimit);
 
+            if (filtered.length === 0) {
+                this.noProjectFound = true;
+                fixAppearance();
+                return this.$store.getters.allProjects.slice(0, 1);
+            } else {
+                this.noProjectFound = false;
+                return filtered;
+            }
         },
 
         computedReadMoreCardIndex() {
@@ -70,24 +82,25 @@ export default {
     },
     methods: {
         handleReadMore(cardIndex) {
-
             this.readMoreCardIndex = cardIndex;
-
+            this.readMoreCardClosState = 0;
         },
         handleCloseReadMore() {
-
-            this.readMoreCardIndex = -1;
+            this.readMoreCardClosState = -2;
+            setTimeout(() => {
+                this.readMoreCardClosState = -1;
+            }, 1000);
         },
         handleSearchedProjects(searchQuery) {
             this.projectsSearchQuery = searchQuery;
         },
         handleLoadMore() {
-
             this.projectsLimit += 3;
         },
     },
 }
 </script>
+
 
 <style lang="scss" scoped>
 @import "@/global_css/portfolio/variables.scss";
@@ -106,6 +119,15 @@ export default {
 
     &.dark {
         background: darken($color2-dark, 5%);
+    }
+}
+
+h6,
+p {
+    color: $color1-dark;
+
+    &.dark {
+        color: $color1-light;
     }
 }
 </style>

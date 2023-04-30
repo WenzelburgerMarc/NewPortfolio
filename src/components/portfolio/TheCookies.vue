@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { checkIcon, changeAppearance } from '@/global_js/portfolio/appearanceFunctions.js'
 export default {
     name: "TheCookies",
     data() {
@@ -70,10 +71,16 @@ export default {
             }
         },
 
-        deactivateCookies() {
-            //console.log("deactivate cookies");
+        async deactivateCookies() {
+            console.log("deactivate cookies");
+            if (localStorage.getItem("appearanceModeSwitched") === 'dark') {
+                await changeAppearance();
+                await checkIcon();
+            }
             localStorage.clear();
             localStorage.setItem("cookiesDisabled", true);
+            document.getElementsByClassName('darkMode-Toggler')[0].style.display = 'none';
+
 
         },
     },

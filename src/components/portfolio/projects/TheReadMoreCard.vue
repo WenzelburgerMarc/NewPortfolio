@@ -31,7 +31,7 @@
     </div>
 </template>
 <script>
-
+import { fixAppearance } from "@/global_js/portfolio/fixAppearance.js";
 export default {
     name: "TheReadMoreCard",
     props: {
@@ -40,6 +40,9 @@ export default {
             required: true,
         },
 
+    },
+    mounted() {
+        fixAppearance();
     },
     computed: {
         computedProject() {
@@ -76,7 +79,7 @@ export default {
 @import "@/global_css/portfolio/variables.scss";
 
 .read-more-container {
-    background-color: darken($color2-light, 25%);
+    background-color: lighten($color2-light, 5%);
     border-radius: 10px;
     padding: 1rem;
     margin: 3rem 3rem 3rem 0;
@@ -100,6 +103,10 @@ export default {
     pointer-events: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 
+    &.dark {
+        background-color: darken($color2-light, 25%);
+    }
+
     .close-read-more {
         position: absolute;
         top: 0;
@@ -117,7 +124,12 @@ export default {
             font-size: $fs-xxl;
             width: 40px;
             height: 40px;
-            color: $color1-light;
+
+            color: $color1-dark;
+
+            &.dark {
+                color: $color1-light;
+            }
         }
 
     }
@@ -176,7 +188,12 @@ export default {
             pointer-events: auto;
             font-size: $fs-xl;
 
-            color: $color1-light;
+            color: $color1-dark;
+
+            &.dark {
+                color: $color1-light;
+
+            }
 
         }
     }
@@ -196,7 +213,7 @@ export default {
         overflow: hidden;
 
         p {
-            color: $color1-light;
+
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1; // Die maximale Anzahl der Zeilen, die angezeigt werden sollen
@@ -205,7 +222,12 @@ export default {
             -webkit-hyphens: auto;
             hyphens: auto;
 
+            color: $color1-dark;
 
+            &.dark {
+                color: $color1-light;
+
+            }
         }
 
     }
@@ -242,9 +264,13 @@ export default {
             background: rgba(255, 255, 255, 0.15);
             font-size: $fs-sm;
             font-weight: $fw-extra-light;
-            color: $color1-light;
             line-height: $fs-md;
             padding: 1rem;
+            color: $color1-dark;
+
+            &.dark {
+                color: $color1-light;
+            }
         }
     }
 
