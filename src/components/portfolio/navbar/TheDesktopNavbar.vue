@@ -25,13 +25,37 @@ export default {
     data() {
         return {
             showDarkModeToggler: false,
+
         };
     },
     mounted() {
         if (localStorage.getItem("cookiesDisabled") !== "true") {
             this.showDarkModeToggler = true;
         }
-    },
+
+        let lastScrollTop = 0;
+        const navbar = document.querySelector(".navbar");
+        window.addEventListener("scroll", () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (window.innerWidth <= 880) {
+                return;
+            }
+            if (scrollTop > lastScrollTop) {
+                // downscroll code
+
+                navbar.classList.add("navbar-hidden");
+            } else {
+                // upscroll code
+
+                navbar.classList.remove("navbar-hidden");
+
+
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+    }
+
 
 }
 </script>
@@ -63,6 +87,8 @@ export default {
 
         &.transparent-nav {
             background-color: $color3-dark !important;
+
+
         }
     }
 
@@ -118,21 +144,16 @@ export default {
 
 }
 
+.navbar-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
 
 
 @media (max-width: 880px) {
     .navbar {
-        &.transparent-nav {
-            background-color: lighten($color2-light, 5%) !important;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
 
-            &.dark {
-                &.transparent-nav {
-                    background-color: darken($color3-dark, 10%) !important;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
-                }
-            }
-        }
 
         .nav-list {
             display: none;

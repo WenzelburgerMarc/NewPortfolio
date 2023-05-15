@@ -77,7 +77,7 @@ export default {
     },
     mounted() {
         if (!this.startTyping) return;
-        if ("ontouchstart" in window || navigator.maxTouchPoints) return;
+
         if (this.interval) return; // exit if interval is already set
 
         const cursorElement = this.$refs.cursor;

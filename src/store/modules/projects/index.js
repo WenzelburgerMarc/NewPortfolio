@@ -26,22 +26,26 @@ const actions = {
       "https://api.github.com/users/WenzelburgerMarc/repos?per_page=100&full_description=true"
     );
     const repositories = await Promise.all(
-      data.map(async (repo) => {
-        const { name, description, html_url, languages_url, created_at } = repo;
-        const { data: crawledLanguages } = await axios.get(languages_url);
-        const portfolioLink = await checkForPortfolioLink(repo.name);
-        const imageLink = await checkForImageLink(repo.name);
-        //const description = await fetchReadme(repo.name);
-        return {
-          name,
-          description,
-          languages: Object.keys(crawledLanguages),
-          html_url,
-          openProjectLink: portfolioLink ? portfolioLink.trim() : "",
-          image: imageLink ? imageLink.trim() : "",
-          created_at,
-        };
-      })
+      data
+        .filter((repo) => repo.name !== "WenzelburgerMarc")
+        .map(async (repo) => {
+          const { name, description, html_url, languages_url, created_at } =
+            repo;
+          const { data: crawledLanguages } = await axios.get(languages_url);
+          const portfolioLink = await checkForPortfolioLink(repo.name);
+          const imageLink = await checkForImageLink(repo.name);
+          //const description = await fetchReadme(repo.name);
+
+          return {
+            name,
+            description,
+            languages: Object.keys(crawledLanguages),
+            html_url,
+            openProjectLink: portfolioLink ? portfolioLink.trim() : "",
+            image: imageLink ? imageLink.trim() : "",
+            created_at,
+          };
+        })
     );
 
     const sortedProjects = sortProjectsByDate(repositories);

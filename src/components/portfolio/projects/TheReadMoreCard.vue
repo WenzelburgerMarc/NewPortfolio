@@ -1,6 +1,7 @@
 <template>
     <div class="read-more-container dark-mode">
 
+
         <div class="image-box" v-if="computedCardImageLink != ''">
             <img :src="computedCardImageLink" alt="" />
         </div>
@@ -93,13 +94,14 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 700px;
+
     width: 100%;
-    max-height: 440px;
+
     margin: .5rem;
     margin-inline: 0.5rem;
     overflow: hidden;
     height: auto;
-    z-index: 10;
+    z-index: 102;
     pointer-events: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 
@@ -168,6 +170,7 @@ export default {
     }
 
     .read-more-body {
+        margin-top: 1rem;
         overflow: hidden;
         height: 100%;
         width: 100%;
@@ -177,6 +180,7 @@ export default {
     .read-more-title {
         opacity: 1;
         transition: 0.15s ease;
+        margin-top: 3rem;
 
         h5 {
             font-size: 1.5rem;
@@ -209,7 +213,7 @@ export default {
 
         height: 40px;
         background: transparent;
-        margin-bottom: 20rem;
+        margin-bottom: 1rem;
         overflow: hidden;
 
         p {
@@ -233,7 +237,7 @@ export default {
     }
 
     .language-list-container {
-        position: absolute;
+
         width: 100%;
         display: flex;
         justify-content: center;
@@ -320,6 +324,8 @@ export default {
         }
     }
 }
+
+
 
 @media (max-height: 600px) {
     .read-more-container {

@@ -16,6 +16,8 @@
         <!-- Load More Button End -->
 
         <!-- Read More Card Start -->
+        <div class="gray-overlay" v-if="readMoreCardClosState !== -1"
+            :class="['animate__animated', readMoreCardClosState === -2 ? 'animate__fadeOut' : 'animate__fadeIn']"></div>
         <TheReadMoreCard :project="filteredProjects[readMoreCardIndex]" v-on:closeReadMore="handleCloseReadMore"
             v-if="readMoreCardClosState !== -1"
             :class="['animate__animated', readMoreCardClosState === -2 ? 'animate__fadeOut' : 'animate__fadeIn']" />
@@ -104,6 +106,19 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/global_css/portfolio/variables.scss";
+
+.gray-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 101 !important;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 1rem;
+    transition: 0.25s ease;
+    pointer-events: none;
+}
 
 .projects {
     position: relative;
