@@ -70,7 +70,6 @@ export default {
                 if (this.currentIndex >= this.text.length) {
                     clearInterval(this.interval);
                     this.cursorVisible = false;
-                    cursorElement.style.display = "none";
                 }
             }
         },
@@ -80,9 +79,6 @@ export default {
 
         if (this.interval) return; // exit if interval is already set
 
-        const cursorElement = this.$refs.cursor;
-        cursorElement.style.display = "inline";
-
         setTimeout(() => {
             this.cursorVisible = true;
             fixAppearance();
@@ -91,34 +87,36 @@ export default {
             }, Number(this.delay));
         }, Number(this.startDelay));
     },
-
-
 };
 </script>
 <style lang="scss" scoped>
 @import "@/global_css/portfolio/variables.scss";
 
-span {
-    font-size: $fs-xxl;
-    font-weight: $fw-bold;
-    color: $color1-dark;
+.typing {
+    span {
+        font-size: $fs-xxl;
+        font-weight: $fw-bold;
+        color: $color1-dark;
 
-    &.dark {
-        color: $color1-light;
+        &.dark {
+            color: $color1-light;
+        }
     }
-}
 
-.cursor {
-    animation: blink 1s infinite;
-    opacity: 0 !important;
+    .cursor {
+        opacity: 0;
+        visibility: hidden;
+        animation: blink 1s infinite;
 
-    &.dark {
-        color: $color1-light !important;
+        &.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &.dark {
+            color: $color1-light !important;
+        }
     }
-}
-
-.cursor.visible {
-    opacity: 1 !important;
 }
 
 @keyframes blink {
