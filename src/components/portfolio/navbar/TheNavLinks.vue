@@ -5,7 +5,7 @@
     <li class="nav-item">
         <div class="dropdown">
             <a href="#" @click="toggleDropdown" class="nav-link dropdown-toggler dark-mode">Previous Work <i
-                    class='bx bx-chevron-down dropdown-icon'></i></a>
+                    class='bx bx-chevron-down dropdown-icon dark-mode'></i></a>
             <div class="dropdown-content dark-mode">
                 <a href="#projects" @click="closeMobile" class="nav-link dropdown-header dark-mode">Projects</a>
                 <div class="divider dark-mode"></div>

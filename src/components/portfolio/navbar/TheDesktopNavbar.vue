@@ -117,7 +117,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 0 0.5rem;
-    transition: .25s;
+    transition: .15s;
     cursor: pointer;
     overflow: hidden;
     margin-left: 1rem;
@@ -127,7 +127,8 @@ export default {
 
         .darkMode-Switcher-Handle {
             left: calc(100% - 35px);
-            background-color: $effect-color;
+
+            background-color: $color3-dark;
 
         }
 
@@ -143,6 +144,8 @@ export default {
         left: 5px;
         z-index: 2;
         transition: 0.25s ease;
+
+
     }
 
     i {
