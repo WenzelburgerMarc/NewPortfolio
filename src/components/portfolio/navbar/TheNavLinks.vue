@@ -321,6 +321,12 @@ export default {
 
 }
 
+@media (max-width: 330px) {
+    .nav-link {
+        font-size: $fs-sm !important;
+    }
+}
+
 @media (hover: none) {
 
     .nav-link:hover::before {

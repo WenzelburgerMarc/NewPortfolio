@@ -90,7 +90,7 @@ export default {
     align-items: center;
     transition: all 0.3s ease-in-out;
     position: fixed;
-    top: 50%;
+    top: calc(50% + 50px);
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 700px;
@@ -317,6 +317,7 @@ export default {
             font-size: $fs-xxs;
             border: none;
             background: transparent !important;
+            margin-top: 1rem;
 
             &:active {
                 background: transparent !important;

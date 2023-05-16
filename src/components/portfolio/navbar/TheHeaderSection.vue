@@ -1,7 +1,7 @@
 <template>
     <header>
         <!-- Desktop Navbar Start -->
-        <TheDesktopNavbar />
+        <TheDesktopNavbar ref="TheDesktopNavbar" />
         <!-- Desktop Navbar End -->
 
         <!-- Mobile Navbar Start -->
@@ -55,6 +55,8 @@ export default {
                         // Dark Mode activated by default if the user has dark mode activated in the browser globally
                         localStorage.setItem("appearanceModeSwitched", "dark");
                         changeAppearance().then(() => localStorage.setItem("appearanceModeSwitchedFinished", "true"));
+
+                        this.$refs.TheDesktopNavbar.toggleDarkMode(true);
 
 
                     }

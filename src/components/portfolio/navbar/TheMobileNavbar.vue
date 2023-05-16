@@ -76,7 +76,6 @@ export default {
     }
 }
 
-
 @media (max-height: 700px) {
     #mobile-navbar {
         justify-content: flex-start;

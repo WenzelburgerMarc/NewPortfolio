@@ -10,8 +10,13 @@
             <span class="bar middle dark-mode"></span>
             <span class="bar bottom dark-mode"></span>
         </div>
-        <div class="darkMode-Toggler" v-if="showDarkModeToggler">
+        <div class="darkMode-Toggler" v-show="false">
             <i class="bx bx-moon dark-mode dark-mode-icon"></i>
+        </div>
+        <div @click="toggleDarkMode(false)" class="darkMode-Switcher" v-if="showDarkModeToggler">
+            <i class="bx bx-moon" id="dark-icon"></i>
+            <div class="darkMode-Switcher-Handle"></div>
+            <i class="bx bx-sun active" id="light-icon"></i>
         </div>
     </nav>
 </template>
@@ -25,10 +30,45 @@ export default {
     data() {
         return {
             showDarkModeToggler: false,
+            darkModeActive: false,
 
         };
     },
+    methods: {
+        toggleDarkMode(fromRef = false) {
+
+            this.darkModeActive = !this.darkModeActive;
+            if (!fromRef)
+                document.getElementsByClassName("darkMode-Toggler")[0].click();
+
+
+            if (this.darkModeActive) {
+                document.getElementsByClassName("darkMode-Switcher")[0].classList.add("active");
+            } else {
+                document.getElementsByClassName("darkMode-Switcher")[0].classList.remove("active");
+            }
+
+
+            // Entsprechende Klassen hinzufügen/entfernen
+            if (this.darkModeActive) {
+                document.getElementById("dark-icon").classList.add("active");
+                document.getElementById("light-icon").classList.remove("active");
+            } else {
+                document.getElementById("dark-icon").classList.remove("active");
+                document.getElementById("light-icon").classList.add("active");
+            }
+            if (document.getElementsByClassName("darkMode-Switcher")[0].classList.contains("active")) {
+                this.darkModeActive = true;
+            } else {
+                this.darkModeActive = false;
+            }
+
+
+
+        },
+    },
     mounted() {
+
         if (localStorage.getItem("cookiesDisabled") !== "true") {
             this.showDarkModeToggler = true;
         }
@@ -54,6 +94,10 @@ export default {
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         }, false);
+
+
+
+
     }
 
 
@@ -62,6 +106,60 @@ export default {
 <style lang="scss" scoped>
 @import "@/global_css/portfolio/variables.scss";
 @import "@/global_css/portfolio/darkModeToggler.scss";
+
+.darkMode-Switcher {
+    position: relative;
+    width: 80px;
+    height: 40px;
+    border-radius: 100px;
+    background-color: rgb(134, 134, 134);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    transition: .25s;
+    cursor: pointer;
+    overflow: hidden;
+    margin-left: 1rem;
+
+    &.active {
+        background-color: rgb(90, 90, 90);
+
+        .darkMode-Switcher-Handle {
+            left: calc(100% - 35px);
+            background-color: $effect-color;
+
+        }
+
+
+    }
+
+    .darkMode-Switcher-Handle {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: lighten($color2-light, 10%);
+        left: 5px;
+        z-index: 2;
+        transition: 0.25s ease;
+    }
+
+    i {
+
+        font-size: $fs-md;
+        color: #fff;
+        transition: 0.25s ease;
+        transform: translateY(30px);
+        opacity: 0;
+        z-index: 1;
+
+        &.active {
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+}
 
 .navbar {
     background-color: lighten($color2-light, 5%);
@@ -74,6 +172,7 @@ export default {
     top: 0;
     z-index: 100;
     width: 100%;
+    min-width: 319px;
     height: 80px;
     transition: 0.25s ease;
 

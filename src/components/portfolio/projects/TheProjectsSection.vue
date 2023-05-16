@@ -111,13 +111,20 @@ export default {
     position: fixed;
     top: 0px;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 200%;
+    height: 200%;
     z-index: 101 !important;
     background: rgba(0, 0, 0, 0.45);
-    border-radius: 1rem;
+
     transition: 0.25s ease;
     pointer-events: none;
+}
+
+@media (max-height: 600px) {
+    .gray-overlay {
+        opacity: 0 !important;
+        display: none !important;
+    }
 }
 
 .projects {
